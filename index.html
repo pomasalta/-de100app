@@ -9,17 +9,12 @@
     <meta name="theme-color" content="#1e3a5f">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="%de100">
-
+    
     <title>%de100 - Yüzde Hesaplama</title>
-
-    <!-- PWA Manifest -->
+    
     <link rel="manifest" href="manifest.json">
-
-    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
-
-    <!-- Apple Touch Icons -->
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="57x57" href="icons/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="icons/apple-touch-icon-60x60.png">
@@ -30,14 +25,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="icons/apple-touch-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png">
-
-    <!-- iOS Splash Screens -->
-    <link rel="apple-touch-startup-image" href="icons/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
-    <link rel="apple-touch-startup-image" href="icons/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
-    <link rel="apple-touch-startup-image" href="icons/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)">
-    <link rel="apple-touch-startup-image" href="icons/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
-    <link rel="apple-touch-startup-image" href="icons/splash-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px)">
-
+    
     <style>
         * {
             margin: 0;
@@ -52,7 +40,6 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-            background: #f0f4f8;
             min-height: 100%;
             display: flex;
             justify-content: center;
@@ -60,16 +47,178 @@
             padding: 20px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Blueprint Arkaplan */
+        .blueprint-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(30, 58, 95, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 58, 95, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(30, 58, 95, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 58, 95, 0.02) 1px, transparent 1px),
+                #f0f4f8;
+            background-size: 
+                100px 100px,
+                100px 100px,
+                20px 20px,
+                20px 20px,
+                100% 100%;
+            animation: blueprintMove 20s linear infinite;
+            z-index: -2;
+        }
+
+        @keyframes blueprintMove {
+            0% {
+                background-position: 
+                    0 0,
+                    0 0,
+                    0 0,
+                    0 0,
+                    0 0;
+            }
+            100% {
+                background-position: 
+                    100px 100px,
+                    100px 100px,
+                    20px 20px,
+                    20px 20px,
+                    0 0;
+            }
+        }
+
+        /* Teknik Çizgiler */
+        .tech-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .tech-line {
+            position: absolute;
+            background: rgba(30, 58, 95, 0.06);
+        }
+
+        .tech-line.horizontal {
+            height: 1px;
+            width: 100%;
+            animation: moveHorizontal 15s linear infinite;
+        }
+
+        .tech-line.vertical {
+            width: 1px;
+            height: 100%;
+            animation: moveVertical 12s linear infinite;
+        }
+
+        @keyframes moveHorizontal {
+            0% { transform: translateY(-100vh); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        @keyframes moveVertical {
+            0% { transform: translateX(-100vw); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(100vw); opacity: 0; }
+        }
+
+        /* Köşe Dekorasyonları */
+        .corner-decoration {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            border: 2px solid rgba(30, 58, 95, 0.1);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .corner-decoration::before,
+        .corner-decoration::after {
+            content: '';
+            position: absolute;
+            background: rgba(30, 58, 95, 0.15);
+        }
+
+        .corner-decoration.top-left::before {
+            width: 30px;
+            height: 2px;
+            top: 10px;
+            left: 10px;
+        }
+
+        .corner-decoration.top-left::after {
+            width: 2px;
+            height: 30px;
+            top: 10px;
+            left: 10px;
         }
 
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(30, 58, 95, 0.05);
             width: 100%;
             max-width: 420px;
             padding: 32px;
             position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Container blueprint border */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px dashed rgba(30, 58, 95, 0.15);
+            border-radius: 14px;
+            pointer-events: none;
         }
 
         .header {
@@ -90,6 +239,18 @@
             color: white;
             font-weight: 700;
             box-shadow: 0 4px 12px rgba(30, 58, 95, 0.3);
+            position: relative;
+        }
+
+        .app-icon::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 1px dashed rgba(30, 58, 95, 0.3);
+            border-radius: 20px;
         }
 
         .header h1 {
@@ -106,7 +267,6 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
-            margin-bottom: 8px;
         }
 
         .header .mode-title {
@@ -115,9 +275,10 @@
             color: #1e3a5f;
             margin-top: 4px;
             padding: 8px 16px;
-            background: #f0f4f8;
+            background: rgba(30, 58, 95, 0.05);
             border-radius: 20px;
             display: inline-block;
+            border: 1px solid rgba(30, 58, 95, 0.1);
         }
 
         .tabs-container {
@@ -146,11 +307,13 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             touch-action: manipulation;
+            position: relative;
         }
 
         .tab-btn:hover {
             background: #f1f5f9;
             transform: translateY(-1px);
+            border-color: rgba(30, 58, 95, 0.3);
         }
 
         .tab-btn:active {
@@ -166,6 +329,19 @@
 
         .input-group {
             margin-bottom: 16px;
+            position: relative;
+        }
+
+        .input-group::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            width: 4px;
+            height: 4px;
+            background: rgba(30, 58, 95, 0.2);
+            border-radius: 50%;
+            transform: translateY(-50%);
         }
 
         .input-group label {
@@ -215,6 +391,19 @@
             justify-content: center;
             align-items: center;
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .result-box::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px dashed rgba(30, 58, 95, 0.1);
+            border-radius: 12px;
+            pointer-events: none;
         }
 
         .result-box.has-result {
@@ -266,51 +455,45 @@
             color: #1e3a5f;
         }
 
-        .clear-btn:active {
-            transform: scale(0.98);
-        }
-
-        .install-prompt {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%);
-            color: white;
-            padding: 16px;
-            border-radius: 12px;
-            margin-bottom: 20px;
+        /* Alt Install Prompt - Minimal */
+        .install-hint {
             text-align: center;
-            display: none;
+            margin-top: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .install-prompt.show {
-            display: block;
-            animation: slideDown 0.3s ease;
+        .install-hint.show {
+            opacity: 1;
         }
 
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .install-btn {
-            background: white;
-            color: #1e3a5f;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            margin-top: 10px;
+        .install-link {
+            font-size: 0.7rem;
+            color: rgba(30, 58, 95, 0.4);
+            text-decoration: none;
             cursor: pointer;
-            font-size: 0.875rem;
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .install-link:hover {
+            color: rgba(30, 58, 95, 0.7);
+            background: rgba(30, 58, 95, 0.05);
+        }
+
+        .install-link svg {
+            width: 10px;
+            height: 10px;
+            opacity: 0.6;
         }
 
         .footer {
             text-align: center;
-            margin-top: 24px;
+            margin-top: 20px;
             font-size: 0.8rem;
             color: #1e3a5f;
             font-weight: 600;
@@ -321,7 +504,106 @@
             display: none !important;
         }
 
-        /* iPhone X+ için safe area */
+        /* Popup Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 320px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-overlay.show .modal {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .modal h3 {
+            font-size: 1.1rem;
+            color: #1e3a5f;
+            margin-bottom: 8px;
+        }
+
+        .modal p {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .modal-close {
+            background: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-close:hover {
+            opacity: 0.9;
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #0f172a; }
+            .blueprint-bg {
+                background: 
+                    linear-gradient(rgba(96, 165, 250, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(96, 165, 250, 0.03) 1px, transparent 1px),
+                    linear-gradient(rgba(96, 165, 250, 0.02) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(96, 165, 250, 0.02) 1px, transparent 1px),
+                    #0f172a;
+                background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px, 100% 100%;
+            }
+            .tech-line { background: rgba(96, 165, 250, 0.06); }
+            .corner-decoration { border-color: rgba(96, 165, 250, 0.1); }
+            .container { background: rgba(30, 41, 59, 0.95); }
+            .container::before { border-color: rgba(96, 165, 250, 0.15); }
+            .header h1, .header .mode-title { color: #f1f5f9; }
+            .header .mode-title { background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.2); }
+            .tab-btn { background: #334155; border-color: #475569; color: #cbd5e1; }
+            .tab-btn.active { background: #60a5fa; border-color: #60a5fa; color: #0f172a; }
+            .input-group input { background: #334155; border-color: #475569; color: #f1f5f9; }
+            .input-group label { color: #cbd5e1; }
+            .result-box { background: #334155; border-color: #475569; }
+            .result-placeholder { color: #64748b; }
+            .clear-btn { background: #334155; border-color: #475569; color: #cbd5e1; }
+            .install-link { color: rgba(96, 165, 250, 0.4); }
+            .install-link:hover { color: rgba(96, 165, 250, 0.7); background: rgba(96, 165, 250, 0.1); }
+        }
+
         @supports (padding: max(0px)) {
             body {
                 padding-left: max(20px, env(safe-area-inset-left));
@@ -329,61 +611,22 @@
                 padding-bottom: max(20px, env(safe-area-inset-bottom));
             }
         }
-
-        /* Dark mode desteği */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #0f172a;
-            }
-            .container {
-                background: #1e293b;
-            }
-            .header h1, .header .mode-title {
-                color: #f1f5f9;
-            }
-            .header .mode-title {
-                background: #334155;
-            }
-            .tab-btn {
-                background: #334155;
-                border-color: #475569;
-                color: #cbd5e1;
-            }
-            .tab-btn.active {
-                background: #60a5fa;
-                border-color: #60a5fa;
-                color: #0f172a;
-            }
-            .input-group input {
-                background: #334155;
-                border-color: #475569;
-                color: #f1f5f9;
-            }
-            .input-group label {
-                color: #cbd5e1;
-            }
-            .result-box {
-                background: #334155;
-                border-color: #475569;
-            }
-            .result-placeholder {
-                color: #64748b;
-            }
-            .clear-btn {
-                background: #334155;
-                border-color: #475569;
-                color: #cbd5e1;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="install-prompt" id="installPrompt">
-            <div>📱 Bu uygulamayı ana ekranınıza ekleyin!</div>
-            <button class="install-btn" onclick="showInstallInstructions()">Nasıl Eklerim?</button>
-        </div>
+    <!-- Blueprint Arkaplan -->
+    <div class="blueprint-bg"></div>
+    
+    <!-- Teknik Çizgiler -->
+    <div class="tech-lines" id="techLines"></div>
+    
+    <!-- Köşe Dekorasyonları -->
+    <div class="corner-decoration top-left"></div>
+    <div class="corner-decoration top-right"></div>
+    <div class="corner-decoration bottom-left"></div>
+    <div class="corner-decoration bottom-right"></div>
 
+    <div class="container">
         <div class="header">
             <div class="app-icon">%</div>
             <h1>de100</h1>
@@ -404,7 +647,6 @@
             </div>
         </div>
 
-        <!-- Oran Bulma -->
         <div id="mode-oran" class="mode-content">
             <div class="input-group">
                 <label>A Sayısı</label>
@@ -416,7 +658,6 @@
             </div>
         </div>
 
-        <!-- Değer Bulma -->
         <div id="mode-deger" class="mode-content hidden">
             <div class="input-group">
                 <label>Sayı</label>
@@ -428,7 +669,6 @@
             </div>
         </div>
 
-        <!-- Değişim -->
         <div id="mode-degisim" class="mode-content hidden">
             <div class="input-group">
                 <label>Eski Değer</label>
@@ -440,7 +680,6 @@
             </div>
         </div>
 
-        <!-- İndirim -->
         <div id="mode-indirim" class="mode-content hidden">
             <div class="input-group">
                 <label>Orjinal Fiyat</label>
@@ -452,7 +691,6 @@
             </div>
         </div>
 
-        <!-- Ekle -->
         <div id="mode-ekle" class="mode-content hidden">
             <div class="input-group">
                 <label>Ana Değer</label>
@@ -464,7 +702,6 @@
             </div>
         </div>
 
-        <!-- Ters (KDV Çıkarma) -->
         <div id="mode-ters" class="mode-content hidden">
             <div class="input-group">
                 <label>KDV Dahil Tutar</label>
@@ -482,181 +719,169 @@
 
         <button class="clear-btn" onclick="clearAll()">TEMİZLE</button>
 
+        <!-- Minimal Install Hint -->
+        <div class="install-hint" id="installHint">
+            <a class="install-link" onclick="showInstallModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12l7-7 7 7"/>
+                </svg>
+                Ana ekrana ekle
+            </a>
+        </div>
+
         <div class="footer">fikirbabasi.net</div>
     </div>
 
+    <!-- Install Modal -->
+    <div class="modal-overlay" id="installModal" onclick="closeInstallModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-icon">📱</div>
+            <h3>Ana Ekrana Ekle</h3>
+            <p id="installText">Bu uygulamayı ana ekranınıza ekleyerek hızlıca erişebilirsiniz.</p>
+            <button class="modal-close" onclick="closeInstallModal()">Tamam</button>
+        </div>
+    </div>
+
     <script>
-        // PWA Service Worker kayıt
+        // Service Worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
-                .then(reg => console.log('Service Worker registered'))
-                .catch(err => console.log('Service Worker registration failed'));
+            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed'));
         }
 
-        // Install prompt gösterimi
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('installPrompt').classList.add('show');
-        });
+        // Dinamik teknik çizgiler oluştur
+        function createTechLines() {
+            const container = document.getElementById('techLines');
+            const lineCount = 5;
+            
+            for (let i = 0; i < lineCount; i++) {
+                const hLine = document.createElement('div');
+                hLine.className = 'tech-line horizontal';
+                hLine.style.top = Math.random() * 100 + '%';
+                hLine.style.animationDelay = (i * 3) + 's';
+                hLine.style.animationDuration = (10 + Math.random() * 10) + 's';
+                container.appendChild(hLine);
+                
+                const vLine = document.createElement('div');
+                vLine.className = 'tech-line vertical';
+                vLine.style.left = Math.random() * 100 + '%';
+                vLine.style.animationDelay = (i * 2.5) + 's';
+                vLine.style.animationDuration = (8 + Math.random() * 8) + 's';
+                container.appendChild(vLine);
+            }
+        }
+        createTechLines();
 
-        // iOS için install kontrolü
-        const isIos = () => {
-            const userAgent = window.navigator.userAgent.toLowerCase();
-            return /iphone|ipad|ipod/.test(userAgent);
-        };
+        // Install detection
+        const isIos = () => /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+        const isStandalone = () => window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
 
-        const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
-
-        if (isIos() && !isInStandaloneMode()) {
-            document.getElementById('installPrompt').classList.add('show');
+        if ((isIos() || 'BeforeInstallPromptEvent' in window) && !isStandalone()) {
+            setTimeout(() => {
+                document.getElementById('installHint').classList.add('show');
+            }, 2000);
         }
 
-        function showInstallInstructions() {
+        function showInstallModal() {
+            const modal = document.getElementById('installModal');
+            const text = document.getElementById('installText');
+            
             if (isIos()) {
-                alert('📱 iPhone\'da Safari\'den paylaş butonuna basıp \"Ana Ekrana Ekle\" seçeneğini kullanın.');
+                text.innerHTML = '<strong>Safari</strong>\'de <strong>Paylaş</strong> butonuna basıp <strong>\'Ana Ekrana Ekle\'</strong> seçeneğini kullanın.';
             } else {
-                alert('📱 Chrome\'da menüden \"Uygulama yükle\" veya \"Ana ekrana ekle\" seçeneğini kullanın.');
+                text.innerHTML = '<strong>Chrome</strong> menüsünden <strong>\'Uygulama yükle\'</strong> veya <strong>\'Ana ekrana ekle\'</strong> seçeneğini kullanın.';
+            }
+            
+            modal.classList.add('show');
+        }
+
+        function closeInstallModal(e) {
+            if (!e || e.target.id === 'installModal' || e.target.className === 'modal-close') {
+                document.getElementById('installModal').classList.remove('show');
             }
         }
 
         let currentMode = 'oran';
-
         const modeTitles = {
-            'oran': 'Oran Bulma',
-            'deger': 'Değer Bulma',
-            'degisim': 'Değişim Hesaplama',
-            'indirim': 'İndirim Hesaplama',
-            'ekle': 'Yüzde Ekleme',
-            'ters': 'KDV Çıkarma'
+            'oran': 'Oran Bulma', 'deger': 'Değer Bulma', 'degisim': 'Değişim Hesaplama',
+            'indirim': 'İndirim Hesaplama', 'ekle': 'Yüzde Ekleme', 'ters': 'KDV Çıkarma'
         };
 
         function setMode(mode) {
             currentMode = mode;
-
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-
             document.getElementById('modeTitle').textContent = modeTitles[mode];
-
-            document.querySelectorAll('.mode-content').forEach(content => {
-                content.classList.add('hidden');
-            });
+            document.querySelectorAll('.mode-content').forEach(c => c.classList.add('hidden'));
             document.getElementById('mode-' + mode).classList.remove('hidden');
-
             clearResult();
         }
 
         function clearResult() {
-            const resultBox = document.getElementById('resultBox');
-            resultBox.classList.remove('has-result');
-            resultBox.innerHTML = '<span class="result-placeholder">Değerleri girin</span>';
+            const rb = document.getElementById('resultBox');
+            rb.classList.remove('has-result');
+            rb.innerHTML = '<span class="result-placeholder">Değerleri girin</span>';
         }
 
         function showResult(value, label) {
-            const resultBox = document.getElementById('resultBox');
-            resultBox.classList.add('has-result');
-            resultBox.innerHTML = `
-                <div class="result-value">${value}</div>
-                <div class="result-label">${label}</div>
-            `;
+            const rb = document.getElementById('resultBox');
+            rb.classList.add('has-result');
+            rb.innerHTML = `<div class="result-value">${value}</div><div class="result-label">${label}</div>`;
         }
 
         function formatNumber(num) {
-            if (isNaN(num)) return '-';
-            return new Intl.NumberFormat('tr-TR', {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 2
-            }).format(num);
+            return isNaN(num) ? '-' : new Intl.NumberFormat('tr-TR', {minimumFractionDigits: 0, maximumFractionDigits: 2}).format(num);
         }
 
         function calculateOran() {
             const a = parseFloat(document.getElementById('oran-a').value);
             const b = parseFloat(document.getElementById('oran-b').value);
-
-            if (isNaN(a) || isNaN(b) || b === 0) {
-                clearResult();
-                return;
-            }
-
-            const result = (a / b) * 100;
-            showResult(formatNumber(result) + '%', `${formatNumber(a)}, ${formatNumber(b)}'nin %${formatNumber(result)}'idir`);
+            if (isNaN(a) || isNaN(b) || b === 0) { clearResult(); return; }
+            const r = (a / b) * 100;
+            showResult(formatNumber(r) + '%', `${formatNumber(a)}, ${formatNumber(b)}'nin %${formatNumber(r)}'idir`);
         }
 
         function calculateDeger() {
-            const sayi = parseFloat(document.getElementById('deger-sayi').value);
-            const yuzde = parseFloat(document.getElementById('deger-yuzde').value);
-
-            if (isNaN(sayi) || isNaN(yuzde)) {
-                clearResult();
-                return;
-            }
-
-            const result = (sayi * yuzde) / 100;
-            showResult(formatNumber(result), `${formatNumber(sayi)} sayısının %${formatNumber(yuzde)}`);
+            const s = parseFloat(document.getElementById('deger-sayi').value);
+            const y = parseFloat(document.getElementById('deger-yuzde').value);
+            if (isNaN(s) || isNaN(y)) { clearResult(); return; }
+            const r = (s * y) / 100;
+            showResult(formatNumber(r), `${formatNumber(s)} sayısının %${formatNumber(y)}`);
         }
 
         function calculateDegisim() {
-            const eski = parseFloat(document.getElementById('degisim-eski').value);
-            const yeni = parseFloat(document.getElementById('degisim-yeni').value);
-
-            if (isNaN(eski) || isNaN(yeni) || eski === 0) {
-                clearResult();
-                return;
-            }
-
-            const result = ((yeni - eski) / eski) * 100;
-            const isArtis = result >= 0;
-            showResult(formatNumber(result) + '%', isArtis ? '📈 Artış' : '📉 Azalış');
+            const e = parseFloat(document.getElementById('degisim-eski').value);
+            const y = parseFloat(document.getElementById('degisim-yeni').value);
+            if (isNaN(e) || isNaN(y) || e === 0) { clearResult(); return; }
+            const r = ((y - e) / e) * 100;
+            showResult(formatNumber(r) + '%', r >= 0 ? '📈 Artış' : '📉 Azalış');
         }
 
         function calculateIndirim() {
-            const fiyat = parseFloat(document.getElementById('indirim-fiyat').value);
-            const oran = parseFloat(document.getElementById('indirim-oran').value);
-
-            if (isNaN(fiyat) || isNaN(oran)) {
-                clearResult();
-                return;
-            }
-
-            const indirimTutar = (fiyat * oran) / 100;
-            const sonFiyat = fiyat - indirimTutar;
-            showResult(formatNumber(sonFiyat) + ' ₺', `İndirim: ${formatNumber(indirimTutar)} ₺`);
+            const f = parseFloat(document.getElementById('indirim-fiyat').value);
+            const o = parseFloat(document.getElementById('indirim-oran').value);
+            if (isNaN(f) || isNaN(o)) { clearResult(); return; }
+            const i = (f * o) / 100;
+            showResult(formatNumber(f - i) + ' ₺', `İndirim: ${formatNumber(i)} ₺`);
         }
 
         function calculateEkle() {
-            const sayi = parseFloat(document.getElementById('ekle-sayi').value);
-            const yuzde = parseFloat(document.getElementById('ekle-yuzde').value);
-
-            if (isNaN(sayi) || isNaN(yuzde)) {
-                clearResult();
-                return;
-            }
-
-            const eklenecek = (sayi * yuzde) / 100;
-            const result = sayi + eklenecek;
-            showResult(formatNumber(result), `Eklendi: ${formatNumber(eklenecek)}`);
+            const s = parseFloat(document.getElementById('ekle-sayi').value);
+            const y = parseFloat(document.getElementById('ekle-yuzde').value);
+            if (isNaN(s) || isNaN(y)) { clearResult(); return; }
+            const ekl = (s * y) / 100;
+            showResult(formatNumber(s + ekl), `Eklendi: ${formatNumber(ekl)}`);
         }
 
         function calculateTers() {
-            const tutar = parseFloat(document.getElementById('ters-tutar').value);
-            const oran = parseFloat(document.getElementById('ters-oran').value);
-
-            if (isNaN(tutar) || isNaN(oran) || oran === 0) {
-                clearResult();
-                return;
-            }
-
-            const kdvHaric = tutar / (1 + (oran / 100));
-            const kdvTutar = tutar - kdvHaric;
-            showResult(formatNumber(kdvHaric), `KDV: ${formatNumber(kdvTutar)}`);
+            const t = parseFloat(document.getElementById('ters-tutar').value);
+            const o = parseFloat(document.getElementById('ters-oran').value);
+            if (isNaN(t) || isNaN(o) || o === 0) { clearResult(); return; }
+            const kh = t / (1 + (o / 100));
+            showResult(formatNumber(kh), `KDV: ${formatNumber(t - kh)}`);
         }
 
         function clearAll() {
-            document.querySelectorAll('input').forEach(input => input.value = '');
+            document.querySelectorAll('input').forEach(i => i.value = '');
             clearResult();
         }
     </script>
