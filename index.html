@@ -12,19 +12,24 @@
     
     <title>%de100 - Yüzde Hesaplama</title>
     
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="57x57" href="icons/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="icons/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="icons/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="icons/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="icons/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="icons/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="icons/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png">
+    <link rel="manifest" href="/yuzde100app/manifest.json">
+    <link rel="icon" type="image/png" sizes="32x32" href="/yuzde100app/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/yuzde100app/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/yuzde100app/icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/yuzde100app/icons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/yuzde100app/icons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/yuzde100app/icons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/yuzde100app/icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/yuzde100app/icons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/yuzde100app/icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/yuzde100app/icons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/yuzde100app/icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/yuzde100app/icons/apple-touch-icon-180x180.png">
+    <link rel="apple-touch-startup-image" href="/yuzde100app/icons/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/yuzde100app/icons/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/yuzde100app/icons/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="/yuzde100app/icons/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="/yuzde100app/icons/splash-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px)">
     
     <style>
         * {
@@ -51,7 +56,6 @@
             overflow-x: hidden;
         }
 
-        /* Blueprint Arkaplan */
         .blueprint-bg {
             position: fixed;
             top: 0;
@@ -93,7 +97,6 @@
             }
         }
 
-        /* Teknik Çizgiler */
         .tech-lines {
             position: fixed;
             top: 0;
@@ -136,7 +139,6 @@
             100% { transform: translateX(100vw); opacity: 0; }
         }
 
-        /* Köşe Dekorasyonları */
         .corner-decoration {
             position: fixed;
             width: 150px;
@@ -208,7 +210,6 @@
             backdrop-filter: blur(10px);
         }
 
-        /* Container blueprint border */
         .container::before {
             content: '';
             position: absolute;
@@ -455,7 +456,6 @@
             color: #1e3a5f;
         }
 
-        /* Alt Install Prompt - Minimal */
         .install-hint {
             text-align: center;
             margin-top: 16px;
@@ -504,7 +504,6 @@
             display: none !important;
         }
 
-        /* Popup Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -575,7 +574,6 @@
             opacity: 0.9;
         }
 
-        /* Dark mode */
         @media (prefers-color-scheme: dark) {
             body { background-color: #0f172a; }
             .blueprint-bg {
@@ -614,13 +612,8 @@
     </style>
 </head>
 <body>
-    <!-- Blueprint Arkaplan -->
     <div class="blueprint-bg"></div>
-    
-    <!-- Teknik Çizgiler -->
     <div class="tech-lines" id="techLines"></div>
-    
-    <!-- Köşe Dekorasyonları -->
     <div class="corner-decoration top-left"></div>
     <div class="corner-decoration top-right"></div>
     <div class="corner-decoration bottom-left"></div>
@@ -719,7 +712,6 @@
 
         <button class="clear-btn" onclick="clearAll()">TEMİZLE</button>
 
-        <!-- Minimal Install Hint -->
         <div class="install-hint" id="installHint">
             <a class="install-link" onclick="showInstallModal()">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -732,7 +724,6 @@
         <div class="footer">fikirbabasi.net</div>
     </div>
 
-    <!-- Install Modal -->
     <div class="modal-overlay" id="installModal" onclick="closeInstallModal(event)">
         <div class="modal" onclick="event.stopPropagation()">
             <div class="modal-icon">📱</div>
@@ -743,12 +734,11 @@
     </div>
 
     <script>
-        // Service Worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed'));
+            navigator.serviceWorker.register('/yuzde100app/sw.js')
+                .catch(err => console.log('SW registration failed'));
         }
 
-        // Dinamik teknik çizgiler oluştur
         function createTechLines() {
             const container = document.getElementById('techLines');
             const lineCount = 5;
@@ -771,7 +761,6 @@
         }
         createTechLines();
 
-        // Install detection
         const isIos = () => /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
         const isStandalone = () => window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
 
